@@ -38,18 +38,6 @@ func home(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-type User struct {
-	ID       uint64 `json:"id"`
-	Username string `json:"username"`
-	Password string `json:"password"`
-}
-
-var user = User{
-	ID:       1,
-	Username: "admin",
-	Password: "admin",
-}
-
 type Credentials struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
@@ -62,25 +50,26 @@ type Claims struct {
 	jwt.StandardClaims
 }
 
-func login(w http.ResponseWriter, r *http.Request) {
-	var creds Credentials
+func signin(w http.ResponseWriter, r *http.Request) {
+	var credentials Credentials
 
-	err := json.NewDecoder(r.Body).Decode(&creds)
+	err := json.NewDecoder(r.Body).Decode(&credentials)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
-	expirationTime := time.Now().Add(5 * time.Minute)
+	expirationTime := time.Now().Add(7 * 24 * time.Hour) // 1 week
 
 	claims := &Claims{
-		Username: creds.Username,
+		Username: credentials.Username,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
 		},
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+
 	tokenString, err := token.SignedString(jwtKey)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -105,4 +94,5 @@ func getMe(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Write([]byte(fmt.Sprintf("Welcome %s!", claims.Username)))
+
 }
