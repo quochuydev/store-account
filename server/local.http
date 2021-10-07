@@ -1,0 +1,24 @@
+POST http://localhost:4000/register
+content-type: application/json
+
+{
+    "basics": {
+        "email": "admin",
+        "password": "admin"
+    }
+}
+
+###
+POST http://localhost:4000/login
+content-type: application/json
+
+{
+    "email": "admin",
+    "password": "admin"
+}
+
+###
+GET http://localhost:4000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzM4ODYwNTQsImlkIjoiNjE1ZjJhNjdmNzBjZTJhNTQ5OTI4Y2JiIiwibmFtZSI6IiAiLCJyb2xlIjoiIn0.UO6HGYm29ctmfD7H5a4W_jAAYfZP-DLOPOtds4u7m80
+
+###
