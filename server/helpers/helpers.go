@@ -14,7 +14,6 @@ type userFromJWT struct {
 	ID   string
 	Name string
 	Role string
-	// Roles []string
 }
 
 func PasswordEncrypt(pwd []byte) string {
@@ -22,8 +21,6 @@ func PasswordEncrypt(pwd []byte) string {
 	if err != nil {
 		log.Println(err)
 	}
-	// GenerateFromPassword returns a byte slice so we need to
-	// convert the bytes to a string and return it
 	return string(hash)
 }
 

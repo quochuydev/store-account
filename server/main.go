@@ -16,8 +16,6 @@ func main() {
 	e.Use(middleware.Logger())
 	// register Users Routes
 	routes.UserSubRoutes(e.Group("/users"))
-	routes.CabSubRoutes(e.Group("/cab"))
-	routes.RideSubRoutes(e.Group("/ride"))
 	e.POST("/login", controllers.Login)
 	e.POST("/register", controllers.Register)
 	// Start server

@@ -9,13 +9,9 @@ import (
 
 func UserSubRoutes(g *echo.Group) {
 	// g.Use(helpers.JWTAuthentication)
-
 	g.Use(middleware.JWT([]byte("secret")))
 
-	// g.GET("/", controllers.GetUsers)
 	g.GET("", controllers.GetUserByID)
-	// g.POST("/login", controllers.Login)
-
-	g.PUT("/", controllers.UpdateUserById)
+	g.PUT("", controllers.UpdateUserById)
 
 }
