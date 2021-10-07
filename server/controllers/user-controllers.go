@@ -11,7 +11,6 @@ import (
 	"github.com/labstack/echo"
 )
 
-// Register is used from register route
 func Register(c echo.Context) error {
 	u := new(models.User)
 	if err := c.Bind(u); err != nil {
@@ -23,7 +22,6 @@ func Register(c echo.Context) error {
 	return c.JSON(http.StatusOK, u)
 }
 
-// Login is used for Login route
 func Login(c echo.Context) error {
 	l := new(models.LoginRequest)
 	if err := c.Bind(l); err != nil {

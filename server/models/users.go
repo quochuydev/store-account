@@ -39,7 +39,6 @@ type LoginResponse struct {
 	Token   string `json:"token"`
 }
 
-// Register is used to insert any user into db
 func Register(user *User) bool {
 	err := mgm.Coll(user).Create(user)
 	if err != nil {
@@ -48,15 +47,12 @@ func Register(user *User) bool {
 	return true
 }
 
-// Creating is used as a pre-insert hook
 func (model *User) Creating() error {
-	// Call to DefaultModel Creating hook
 	if err := model.DefaultModel.Creating(); err != nil {
 		return err
 	}
 	fmt.Println("control Here")
-	// We can check if model fields is not valid, return error to
-	// cancel document insertion .
+
 	pwd := []byte(model.Basics.Password)
 	encPwd := helpers.PasswordEncrypt(pwd)
 
@@ -66,7 +62,6 @@ func (model *User) Creating() error {
 	return nil
 }
 
-// FindUserByEmail is used to retrive user details from DB by Email
 func FindUserByEmail(Email string) *User {
 	u := &User{}
 	coll := mgm.Coll(u)
@@ -77,7 +72,6 @@ func FindUserByEmail(Email string) *User {
 	return u
 }
 
-// FindUserByID us used to retrive suer details from DB by ID
 func FindUserByID(id string) *User {
 	u := &User{}
 	coll := mgm.Coll(u)
