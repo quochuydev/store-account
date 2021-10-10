@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "autoprefixer": "^10.3.6",
+    "axios": "^0.22.0",
     "postcss": "^8.3.8",
     "tailwindcss": "^2.2.16",
     "vue": "^3.2.16"

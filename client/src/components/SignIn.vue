@@ -2,6 +2,11 @@
 import { ref } from "vue";
 
 const count = ref(0);
+const username = ref(null);
+
+function signin() {
+  console.log(123, username);
+}
 </script>
 
 <template>
@@ -60,6 +65,7 @@ const count = ref(0);
                 dark:focus:ring-gray-900
                 dark:focus:border-gray-500
               "
+              v-model="username"
             />
           </div>
           <div class="mb-6">
@@ -86,6 +92,7 @@ const count = ref(0);
               name="password"
               id="password"
               placeholder="Your password"
+              v-model="password"
               class="
                 w-full
                 px-3
@@ -120,6 +127,7 @@ const count = ref(0);
                 duration-100
                 ease-in-out
               "
+              v-on:click="signin()"
             >
               Sign in
             </button>
